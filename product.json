@@ -1,0 +1,28 @@
+[
+  {
+    "model": "main.product",
+    "pk": 1,
+    "fields": {
+      "name": "iPhone",
+      "description": "Apple iPhone 13 Pro 128GB (Небесно-голубой | Sierra Blue)",
+      "image": "",
+      "category": 1,
+      "price": 1100.00,
+      "created_at": "2024-05-07T12:00:00Z",
+      "updated_at": "2024-05-07T12:00:00Z"
+    }
+  },
+  {
+    "model": "main.product",
+    "pk": 2,
+    "fields": {
+      "name": "iPad",
+      "description": "11 Планшет Apple iPad Pro 11 2022, 128 ГБ, Wi-Fi, iPadOS, космический серый",
+      "image": "",
+      "category": 2,
+      "price": 1025.00,
+      "created_at": "2024-05-07T12:00:00Z",
+      "updated_at": "2024-05-07T12:00:00Z"
+    }
+  }
+]
