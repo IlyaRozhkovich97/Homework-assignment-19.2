@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин Apple</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.3/css/uikit.min.css">
+    <style>
+        .uk-card {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .uk-card-img-top {
+            width: 200px; /* Фиксируем ширину изображения */
+        }
+        .uk-card-body {
+            padding: 20px;
+        }
+        /* Стили для модального окна */
+        .uk-modal-dialog {
+            max-width: 600px;
+            margin-top: 100px;
+            border-radius: 10px;
+        }
+        .uk-modal-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .uk-modal-body input[type="text"],
+        .uk-modal-body input[type="email"],
+        .uk-modal-body input[type="tel"],
+        .uk-modal-body textarea {
+            width: calc(100% - 20px);
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        .uk-modal-body button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .uk-modal-body button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<!-- Навигационное меню -->
+<nav class="uk-navbar-container" uk-navbar="">
+    <div class="uk-navbar-left">
+        <a class="uk-navbar-item uk-logo" href="#"><span class="uk-text-bold">iStore</span> - магазин техники Apple</a>
+    </div>
+    <div class="uk-navbar-right">
+        <ul class="uk-navbar-nav">
+            <li>
+                <a href="#" style="text-transform: none;">Главная</a>
+            </li>
+            <li>
+                <a href="#" style="text-transform: none;">iPhone</a>
+            </li>
+            <li>
+                <a href="#" style="text-transform: none;">iPad</a>
+            </li>
+            <li>
+                <a href="#" style="text-transform: none;">Mac</a>
+            </li>
+            <li>
+                <a href="#" style="text-transform: none;">Watch</a>
+            </li>
+            <li>
+                <a href="#" style="text-transform: none;">Аксессуары</a>
+            </li>
+            <li>
+                <a href="#" style="text-transform: none;">Доставка и оплата</a>
+            </li>
+            <li>
+                <a href="#" style="text-transform: none;">Контакты</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно с формой заказа -->
+<div id="order-form-modal" uk-modal="">
+    <div class="uk-modal-dialog uk-modal-body uk-border-rounded">
+        <h2 class="uk-modal-title">Оформить заказ</h2>
+        <form action="{% url 'home_page' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="product" value="iPhone 13 Pro"> <label for="name">Имя:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email"><br>
+            <label for="phone">Телефон:</label><br>
+            <input type="tel" id="phone" name="phone"><br>
+            <label for="message">Сообщение:</label><br>
+            <textarea id="message" name="message"></textarea><br>
+            <button type="submit" class="uk-button uk-button-primary">Отправить</button>
+        </form>
+    </div>
+</div>
+
+
+<!-- Подвал -->
+<footer class="uk-text-center uk-margin-large-top" style="margin-top: 50px;">
+    <p>&copy; 2023 - {% now 'Y' %} iStore.Все права защищены</p>
+</footer>
+
+<!-- Bootstrap core JavaScript
+   ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.3/js/uikit.min.js"></script>
+<script>
+    document.getElementById('open-modal').addEventListener('click', function(){
+        UIkit.modal('#order-form-modal').show();
+    });
+</script>
+</body>
+</html>

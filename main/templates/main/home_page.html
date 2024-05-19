@@ -1,120 +1,60 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Магазин Apple</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.3/css/uikit.min.css">
-  <style>
-        /* Дополнительные стили для текста в навигационном меню */
-        .uk-navbar-nav > li > a {
-            text-transform: none !important;
-        }
-        /* Увеличение высоты поля для сообщения */
-        #message {
-            height: 200px;
-        }
-        /* Стили для модального окна */
-        .uk-modal-dialog {
-            max-width: 600px;
-            margin-top: 100px;
-            border-radius: 10px;
-        }
-        .uk-modal-title {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .uk-modal-body input[type="text"],
-        .uk-modal-body input[type="email"],
-        .uk-modal-body input[type="tel"],
-        .uk-modal-body textarea {
-            width: calc(100% - 20px);
-            margin-bottom: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-        .uk-modal-body button {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .uk-modal-body button:hover {
-            background-color: #0056b3;
-        }
-  </style>
-</head>
-<body>
+{% extends 'main/base.html' %}
+{% load media_filters %}
 
-  <!-- Навигационное меню -->
-  <nav class="uk-navbar-container" uk-navbar="">
-    <div class="uk-navbar-left">
-      <a class="uk-navbar-item uk-logo" href="#"><span class="uk-text-bold">iStore</span> - магазин техники Apple</a>
+{% block content %}
+
+<style>
+    .uk-card {
+        height: 100%; /* Это обеспечит одинаковую высоту для всех карточек */
+    }
+</style>
+
+<div class="uk-padding uk-margin-large-top">
+    <div class="uk-grid uk-child-width-1-2@m" uk-grid>
+        {% for product in object_list %}
+        <!-- Карточка -->
+        <div>
+            <div class="uk-card uk-card-default">
+                {% if product.image %}
+                <!-- Использование вашего фильтра для вывода пути к изображению -->
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200" height="200">
+                {% endif %}
+                <div class="uk-card-body">
+                    <h3 class="uk-card-title">
+                        {% if product.is_active %}
+                            {{ product.name }}
+                        {% else %}
+                            <span class="text-muted">{{ product.name }}</span>
+                        {% endif %}
+                    </h3>
+                    <p>
+                        {{ product.description|slice:":100" }}{% if product.description|length > 100 %}...{% endif %}
+                    </p>
+                    <!-- Кнопка "Подробнее" и скрытый блок с полным текстом описания -->
+                    <button class="uk-button uk-button-default more-btn" data-product-desc="{{ product.description }}" style="background-color: green; color: white;">Подробнее</button>
+                    <div class="full-description" style="display: none;">
+                        {{ product.description }}
+                    </div>
+                    <!-- Конец кнопки "Подробнее" -->
+                    <p><strong>Price:</strong> {{ product.price }} ₽</p>
+                    <div class="uk-margin">
+                        <button class="uk-button uk-button-default open-modal-btn" data-product-name="{{ product.name }}" style="background-color: blue; color: white;" uk-toggle="target: #order-form-modal">Оформить заказ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    <div class="uk-navbar-right">
-      <ul class="uk-navbar-nav">
-        <li>
-          <a href="#">iPhone</a>
-        </li>
-        <li>
-          <a href="#">iPad</a>
-        </li>
-        <li>
-          <a href="#">Mac</a>
-        </li>
-        <li>
-          <a href="#">Watch</a>
-        </li>
-        <li>
-          <a href="#">Аксессуары</a>
-        </li>
-        <li>
-          <a href="#">Доставка и оплата</a>
-        </li>
-        <li>
-          <a href="#">Контакты</a>
-        </li>
-      </ul>
-    </div>
-  </nav><!-- Основное содержимое -->
-  <div class="uk-container uk-margin-top">
-    <div class="uk-grid">
-      <div class="uk-width-1-2@m"><img src="https://i.ebayimg.com/images/g/ioAAAOSwGPBlB9hj/s-l1600.jpg" alt="Товар" class="uk-margin-bottom"></div>
-      <div class="uk-width-1-2@m">
-        <h2>Apple iPhone 13 Pro 128GB (Небесно-голубой | Sierra Blue)</h2>
-        <p>Каждый раз оправдывать самые высокие ожидания – сложно, но Apple это удаётся. С iPhone 13 Pro каждый сценарий использования смартфона меняется. Больше возможностей для съёмки, невероятный экран, феноменальная производительность и максимум скорости по Wi-Fi, LTE и 5G, а также ёмкий аккумулятор и быстрая зарядка делают его лучшим, чем все предыдущие модели. С учётом возможностей и особенностей iOS 15, iPhone 13 Pro можно смело назвать смартфоном мечты!</p>
-        <p>Цена: $1 100</p><!-- Кнопка для открытия модального окна с формой заказа -->
-        <button class="uk-button uk-button-primary" uk-toggle="target: #order-form-modal">Заказать</button>
-      </div>
-    </div>
-  </div><!-- Модальное окно с формой заказа -->
-  <div id="order-form-modal" uk-modal="">
-    <div class="uk-modal-dialog uk-modal-body uk-border-rounded">
-      <h2 class="uk-modal-title">Оформить заказ</h2>
-      <form action="{% url 'home_page' %}" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="product" value="iPhone 13 Pro"> <label for="name">Имя:</label><br>
-        <input type="text" id="name" name="name"><br>
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email"><br>
-        <label for="phone">Телефон:</label><br>
-        <input type="tel" id="phone" name="phone"><br>
-        <label for="message">Сообщение:</label><br>
-        <textarea id="message" name="message"></textarea><br>
-        <button type="submit" class="uk-button uk-button-primary">Отправить</button>
-      </form>
-    </div>
-  </div><!-- Подвал -->
-  <footer class="uk-text-center uk-margin-large-top">
-    <p>© 2024 iStore Все права защищены.</p>
-  </footer><!-- Подключение скриптов UIkit Bootstrap -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.3/js/uikit.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.3/js/uikit-icons.min.js"></script>
-</body>
-</html>
+</div>
+
+<!-- Скрипт для обработки кнопки "Подробнее" -->
+<script>
+    document.querySelectorAll('.more-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const descriptionBlock = button.nextElementSibling;
+            descriptionBlock.style.display = descriptionBlock.style.display === 'none' ? 'block' : 'none';
+        });
+    });
+</script>
+
+{% endblock %}

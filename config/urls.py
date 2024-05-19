@@ -23,5 +23,5 @@ urlpatterns = [
     # Путь для административного интерфейса Django
     path('admin/', admin.site.urls),
     # Пустой путь, который включает маршруты из приложения main
-    path('', include('main.urls')),
+    path('', include('main.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

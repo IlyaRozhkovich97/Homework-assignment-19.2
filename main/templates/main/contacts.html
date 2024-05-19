@@ -1,139 +1,97 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Магазин Apple</title><!-- Подключение стилей UIkit Bootstrap -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.3/css/uikit.min.css">
-  <style>
-        /* Дополнительные стили для текста в навигационном меню */
-        .uk-navbar-nav > li > a {
-            text-transform: none !important;
-        }
-        /* Увеличение высоты поля для сообщения */
-        #message {
-            height: 200px;
-        }
-        /* Стили для модального окна */
-        .uk-modal-dialog {
-            max-width: 600px;
-            margin-top: 100px;
-            border-radius: 10px;
-        }
-        .uk-modal-title {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .uk-modal-body input[type="text"],
-        .uk-modal-body input[type="email"],
-        .uk-modal-body input[type="tel"],
-        .uk-modal-body textarea {
-            width: calc(100% - 20px);
-            margin-bottom: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-        .uk-modal-body button {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .uk-modal-body button:hover {
-            background-color: #0056b3;
-        }
-        /* Стили для формы контактной информации */
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #f9f9f9;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .contact-form input[type="text"],
-        .contact-form input[type="email"],
-        .contact-form input[type="tel"],
-        .contact-form textarea {
-            width: calc(100% - 20px);
-            margin-bottom: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-        .contact-form button {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .contact-form button:hover {
-            background-color: #0056b3;
-        }
-  </style>
-</head>
-<body>
-  <!-- Навигационное меню -->
-  <nav class="uk-navbar-container" uk-navbar="">
-    <div class="uk-navbar-left">
-      <a class="uk-navbar-item uk-logo" href="#"><span class="uk-text-bold">iStore</span> - магазин техники Apple</a>
-    </div>
-    <div class="uk-navbar-right">
-      <ul class="uk-navbar-nav">
-        <li>
-          <a href="#">iPhone</a>
-        </li>
-        <li>
-          <a href="#">iPad</a>
-        </li>
-        <li>
-          <a href="#">Mac</a>
-        </li>
-        <li>
-          <a href="#">Watch</a>
-        </li>
-        <li>
-          <a href="#">Аксессуары</a>
-        </li>
-        <li>
-          <a href="#">Доставка и оплата</a>
-        </li>
-        <li>
-          <a href="#">Контакты</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <!-- Форма контактной информации -->
-  <div class="uk-container uk-margin-top">
+{% extends 'main/base.html' %}
+
+{% block content %}
+<style>
+    /* Дополнительные стили для текста в навигационном меню */
+    .uk-navbar-nav > li > a {
+        text-transform: none !important;
+    }
+    /* Увеличение высоты поля для сообщения */
+    #message {
+        height: 200px;
+    }
+    /* Стили для модального окна */
+    .uk-modal-dialog {
+        max-width: 600px;
+        margin-top: 100px;
+        border-radius: 10px;
+    }
+    .uk-modal-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    .uk-modal-body input[type="text"],
+    .uk-modal-body input[type="email"],
+    .uk-modal-body input[type="tel"],
+    .uk-modal-body textarea {
+        width: calc(100% - 20px);
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+    }
+    .uk-modal-body button {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .uk-modal-body button:hover {
+        background-color: #0056b3;
+    }
+    /* Стили для формы контактной информации */
+    .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form input[type="tel"],
+    .contact-form textarea {
+        width: calc(100% - 20px);
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+    }
+    .contact-form button {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .contact-form button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<!-- Форма контактной информации -->
+<div class="uk-container uk-margin-top">
     <div class="contact-form">
-      <h2 class="uk-text-center">Свяжитесь с нами</h2>
-      <form action="{% url 'contacts' %}" method="post">
-        {% csrf_token %}
-        <input type="text" id="name" name="name" placeholder="Ваше имя"><br>
-        <input type="email" name="email" placeholder="Ваш email"><br>
-        <input type="tel" name="phone" placeholder="Ваш телефон"><br>
-        <textarea name="message" placeholder="Ваше сообщение" rows="5"></textarea><br>
-        <button type="submit">Отправить</button>
-      </form>
+        <h2 class="uk-text-center">Свяжитесь с нами</h2>
+        <form action="{% url 'contacts' %}" method="post">
+            {% csrf_token %}
+            <input type="text" id="name" name="name" placeholder="Ваше имя"><br>
+            <input type="email" name="email" placeholder="Ваш email"><br>
+            <input type="tel" name="phone" placeholder="Ваш телефон"><br>
+            <textarea id="message" name="message" placeholder="Ваше сообщение" rows="5"></textarea><br>
+            <button type="submit">Отправить</button>
+        </form>
     </div>
-  </div>
-  <footer class="uk-text-center uk-margin-large-top">
-    <p>© 2024 iStore Все права защищены.</p>
-  </footer>
-  <!-- Подключение скриптов UIkit Bootstrap -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.3/js/uikit.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.7.3/js/uikit-icons.min.js"></script>
-</body>
-</html>
+</div>
+
+{% endblock %}
