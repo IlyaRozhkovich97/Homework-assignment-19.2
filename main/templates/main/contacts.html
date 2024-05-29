@@ -1,97 +1,98 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-<style>
-    /* Дополнительные стили для текста в навигационном меню */
-    .uk-navbar-nav > li > a {
-        text-transform: none !important;
-    }
-    /* Увеличение высоты поля для сообщения */
-    #message {
-        height: 200px;
-    }
-    /* Стили для модального окна */
-    .uk-modal-dialog {
-        max-width: 600px;
-        margin-top: 100px;
-        border-radius: 10px;
-    }
-    .uk-modal-title {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-    .uk-modal-body input[type="text"],
-    .uk-modal-body input[type="email"],
-    .uk-modal-body input[type="tel"],
-    .uk-modal-body textarea {
-        width: calc(100% - 20px);
-        margin-bottom: 20px;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        font-size: 16px;
-    }
-    .uk-modal-body button {
-        width: 100%;
-        padding: 10px;
-        border-radius: 5px;
-        background-color: #007bff;
-        color: #fff;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    .uk-modal-body button:hover {
-        background-color: #0056b3;
-    }
-    /* Стили для формы контактной информации */
-    .contact-form {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        border-radius: 10px;
-        background-color: #f9f9f9;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .contact-form input[type="text"],
-    .contact-form input[type="email"],
-    .contact-form input[type="tel"],
-    .contact-form textarea {
-        width: calc(100% - 20px);
-        margin-bottom: 20px;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        font-size: 16px;
-    }
-    .contact-form button {
-        width: 100%;
-        padding: 10px;
-        border-radius: 5px;
-        background-color: #007bff;
-        color: #fff;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    .contact-form button:hover {
-        background-color: #0056b3;
-    }
-</style>
+<!DOCTYPE html>
+<html lang="ru">
 
-<!-- Форма контактной информации -->
-<div class="uk-container uk-margin-top">
-    <div class="contact-form">
-        <h2 class="uk-text-center">Свяжитесь с нами</h2>
-        <form action="{% url 'contacts' %}" method="post">
-            {% csrf_token %}
-            <input type="text" id="name" name="name" placeholder="Ваше имя"><br>
-            <input type="email" name="email" placeholder="Ваш email"><br>
-            <input type="tel" name="phone" placeholder="Ваш телефон"><br>
-            <textarea id="message" name="message" placeholder="Ваше сообщение" rows="5"></textarea><br>
-            <button type="submit">Отправить</button>
-        </form>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Дополнительные стили */
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: none;
+        }
+
+        .form-floating label {
+            color: #495057;
+        }
+
+        .form-floating input,
+        .form-floating textarea {
+            border-color: #ced4da;
+        }
+
+        /* Увеличение ширины формы */
+        .contact-form {
+            min-width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Контакты <i class="fas fa-address-book"></i></h1>
     </div>
-</div>
 
+    <div class="container">
+        <div class="row text-start">
+            <div class="col-lg-9 col-md-6 col-sm-12">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <tr>
+                                <td class="w-25">Страна</td>
+                                <td>Россия</td>
+                            </tr>
+                            <tr>
+                                <td class="w-25">ИНН</td>
+                                <td>7816719890</td>
+                            </tr>
+                            <tr>
+                                <td class="w-25">Адрес</td>
+                                <td>191024, город Санкт-Петербург, Тележная ул, д. 3 литера А, помещ. 3-н офис 42 р.м. 38</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card mb-4 box-shadow contact-form">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal"><i class="fas fa-envelope"></i> Свяжитесь с нами</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="" class="form-floating">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="name"><i class="fas fa-user"></i> Имя</label>
+                                <input type="text" name="name" class="form-control" id="name" placeholder="Ваше имя" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone"><i class="fas fa-phone"></i> Телефон</label>
+                                <input type="text" name="phone" class="form-control" id="phone" placeholder="Контактный телефон" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message"><i class="fas fa-envelope"></i> Сообщение</label>
+                                <textarea type="text" name="message" class="form-control" id="message" placeholder="Сообщение" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-block btn-outline-primary"><i class="far fa-paper-plane"></i> Отправить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
 {% endblock %}

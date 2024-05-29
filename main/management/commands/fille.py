@@ -39,4 +39,3 @@ class Command(BaseCommand):
                 )
             else:
                 print(f"Category with id {category_id} does not exist.")
-

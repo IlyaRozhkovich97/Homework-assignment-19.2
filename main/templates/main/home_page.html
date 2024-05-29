@@ -2,13 +2,31 @@
 {% load media_filters %}
 
 {% block content %}
-
 <style>
     .uk-card {
         height: 100%; /* Это обеспечит одинаковую высоту для всех карточек */
+        margin-bottom: 10px; /* Уменьшенный отступ снизу */
+        margin-top: 10px; /* Уменьшенный отступ сверху */
+    }
+    .text-center h1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        margin: 20px 0; /* Отступ сверху и снизу */
+    }
+    .uk-grid {
+        margin-left: -10px; /* Уменьшение отступа между колонками */
+        margin-right: -10px; /* Уменьшение отступа между колонками */
+    }
+    .uk-grid > * {
+        padding-left: 10px; /* Уменьшение внутреннего отступа между колонками */
+        padding-right: 10px; /* Уменьшение внутреннего отступа между колонками */
     }
 </style>
-
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1>Товары</h1>
+</div>
 <div class="uk-padding uk-margin-large-top">
     <div class="uk-grid uk-child-width-1-2@m" uk-grid>
         {% for product in object_list %}
@@ -45,6 +63,10 @@
         </div>
         {% endfor %}
     </div>
+</div>
+
+<div class="uk-padding">
+    <a href="{% url 'add_product' %}" class="uk-button uk-button-primary" style="background-color: orange; color: white;">Создать товар</a>
 </div>
 
 <!-- Скрипт для обработки кнопки "Подробнее" -->

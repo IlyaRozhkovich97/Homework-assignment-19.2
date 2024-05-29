@@ -1,5 +1,6 @@
-Django
+Django~=5.0.5
 psycopg2-binary
 pillow
 ipython
 django-stubs
+pytils~=0.4.1
